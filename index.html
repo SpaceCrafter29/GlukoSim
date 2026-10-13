@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#151B30">
+  <meta name="color-scheme" content="dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GlukoSim">
+  <meta name="description" content="Blutzucker-Simulator und Tagesplaner – Biologie-Schulprojekt">
+  <title>GlukoSim</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-plan" viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 5-8 4 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-vergleich" viewBox="0 0 24 24"><path d="M3 15c3 0 4-6 7-6s4 8 11 8M3 19c4 0 6-12 9-12s5 5 9 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-essen" viewBox="0 0 24 24"><path d="M7 3v8m-2.5-8v5a2.5 2.5 0 0 0 5 0V3M7 11v10M17 3c-2.2 1.6-3 4.5-3 7.5 0 1.4.9 2.5 3 2.5V21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-einst" viewBox="0 0 24 24"><path d="M4 7h9m4 0h3M4 17h3m4 0h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="7" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="17" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+      <symbol id="i-sport" viewBox="0 0 24 24"><path d="M2.5 12h4l2.5-6 5 12 2.5-6h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-snack" viewBox="0 0 24 24"><path d="M12 7c-1.2-2.6-4.5-3-6.2-1.1C3.9 8 4.4 12.6 7 16.5c1.4 2.1 3 3.3 5 2.6 2 .7 3.6-.5 5-2.6 2.6-3.9 3.1-8.5 1.2-10.6C16.5 4 13.2 4.4 12 7zM12 7c0-1.8.8-3.2 2.4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-insulin" viewBox="0 0 24 24"><path d="M12 3.5c-3.6 4.8-5.5 8-5.5 10.8a5.5 5.5 0 0 0 11 0c0-2.8-1.9-6-5.5-10.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 14.5h4M12 12.5v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-funke" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor"/></symbol>
+      <symbol id="i-pfeil" viewBox="0 0 24 24"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-suche" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+      <symbol id="i-auge" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    </defs>
+  </svg>
+
+  <div id="app">
+    <header class="appbar">
+      <h1 id="appTitel">Heute</h1>
+      <button class="profil-chip" id="profilChip" aria-label="Stoffwechsel wechseln"><span class="punkt"></span><span id="profilName">Gesund</span></button>
+    </header>
+
+    <main class="seiten" id="seiten">
+      <!-- ================= PLAN ================= -->
+      <section class="seite" data-seite="plan" id="seite-plan">
+        <div class="start-leer" id="startLeer" hidden>
+          <h2>Noch kein Plan für heute</h2>
+          <p class="klein">Wähle deinen Stoffwechsel, trag deine Mahlzeiten ein, und der Algorithmus findet den besten Tagesablauf.</p>
+          <button class="btn primaer" id="btnStartLeer">Tag planen</button>
+        </div>
+        <div id="planInhalt">
+          <div class="readout" id="readout">
+            <div class="ro-zahl"><span id="roWert">–</span><svg class="ro-pfeil" id="roPfeil"><use href="#i-pfeil"/></svg></div>
+            <div class="ro-info"><span class="ro-einheit">mg/dl</span><span id="roZeit"></span><span id="roInsulin" class="ro-insulin"></span></div>
+          </div>
+          <div id="planChart"></div>
+          <div class="chart-leiste">
+            <button class="umschalter" id="tInsulin" aria-pressed="false"><span class="farbpunkt lila"></span>Insulin</button>
+            <span class="leiste-hinweis">Gestrichelt: Schritt davor</span>
+            <div class="zoom"><button id="zoomAus" aria-label="Ganzen Tag zeigen">−</button><button id="zoomEin" aria-label="Vergrößern">+</button></div>
+          </div>
+
+          <div id="schritte"></div>
+          <div class="stats" id="planStats"></div>
+
+          <div class="aktionen">
+            <button class="btn primaer" id="btnErklaeren"><svg><use href="#i-funke"/></svg>Kurve erklären</button>
+            <button class="btn tonal" id="btnNeuerTag">Neuer Tag</button>
+          </div>
+          <div id="erklaerBox"></div>
+
+          <h2 class="abschnitt">Tagesablauf</h2>
+          <ul class="liste" id="eintragListe"></ul>
+          <button class="text-btn" id="btnAendern">Mahlzeiten oder Bewegung ändern</button>
+          <p class="fuss">Schulprojekt. Vereinfachte Simulation, keine medizinische Beratung.</p>
+        </div>
+      </section>
+
+      <!-- ================= VERGLEICH ================= -->
+      <section class="seite" data-seite="vergleich" id="seite-vergleich">
+        <p class="einleitung">Dein Tagesplan mit drei verschiedenen Stoffwechseln. Tippe auf die Kurve für Werte, auf ein Profil zum Ein- und Ausblenden.</p>
+        <div class="legende" id="vLegende"></div>
+        <div id="vChart"></div>
+        <div class="chart-leiste">
+          <button class="umschalter" id="vInsulin" aria-pressed="false"><span class="farbpunkt lila"></span>Insulin</button>
+          <span class="leiste-hinweis">Band: 70–140 mg/dl</span>
+          <div class="zoom"><button id="vZoomAus" aria-label="Ganzen Tag zeigen">−</button><button id="vZoomEin" aria-label="Vergrößern">+</button></div>
+        </div>
+        <div class="tabelle-wrap"><table class="vtabelle" id="vTabelle"></table></div>
+        <p class="klein" id="vHinweis"></p>
+        <div class="aktionen einzeln"><button class="btn primaer" id="btnVergleichErklaeren"><svg><use href="#i-funke"/></svg>Unterschiede erklären</button></div>
+        <div id="vErklaerBox"></div>
+        <p class="fuss">Schulprojekt. Vereinfachte Simulation, keine medizinische Beratung.</p>
+      </section>
+
+      <!-- ================= EINSTELLUNGEN ================= -->
+      <section class="seite" data-seite="einstellungen" id="seite-einstellungen">
+        <div class="gruppe">
+          <h2>Stoffwechsel</h2>
+          <div class="segment drei" id="eProfil" role="radiogroup">
+            <button data-wert="gesund" role="radio">Gesund</button>
+            <button data-wert="typ1" role="radio">Typ 1</button>
+            <button data-wert="typ2" role="radio">Typ 2</button>
+          </div>
+          <label class="schalter"><input type="checkbox" id="eInsulinAuto"><span class="schiene"></span><span>Typ 1: Insulin automatisch spritzen (1 IE pro 10 g Kohlenhydrate, 16 IE Langzeitinsulin)</span></label>
+          <label class="feld"><span>Körpergewicht (kg)</span><input type="number" id="eGewicht" inputmode="numeric" min="25" max="200"></label>
+        </div>
+        <div class="gruppe">
+          <h2>App</h2>
+          <button class="btn primaer" id="eInstallieren" hidden>App installieren</button>
+          <p class="klein" id="eInstallHinweis"></p>
+          <button class="btn tonal" id="eNeuerTag">Neuen Tag starten</button>
+          <button class="btn tonal" id="eDemo">Beispieltag laden</button>
+          <button class="btn gefahr" id="eReset">Alles zurücksetzen</button>
+        </div>
+        <div class="gruppe">
+          <h2>Über GlukoSim</h2>
+          <p class="klein">Biologie-Schulprojekt. Das Modell bildet Aufnahme aus dem Darm, Insulin, Leber (Glykogen), Glukagon, Muskelarbeit (GLUT4) und die Nierenschwelle vereinfacht nach. Kein Medizinprodukt. Alle Daten bleiben auf diesem Gerät.</p>
+          <p class="klein">Datenquellen: Nährwerte aus der eingebauten Lebensmittel-Liste (Richtwerte pro 100 g). Glykämischer Index nach Atkinson et al., Diabetes Care 2008. Aufnahme aus dem Darm nach dem Zwei-Kammer-Modell von Hovorka et al., Physiol Meas 2004. Grenzwerte nach den Diagnosekriterien der Deutschen Diabetes Gesellschaft.</p>
+          <p class="klein" id="eVersion"></p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="navleiste" id="nav">
+      <button data-ziel="plan" class="aktiv"><span class="nav-ico"><svg><use href="#i-plan"/></svg></span><span>Heute</span></button>
+      <button data-ziel="vergleich"><span class="nav-ico"><svg><use href="#i-vergleich"/></svg></span><span>Vergleich</span></button>
+      <button data-ziel="einstellungen"><span class="nav-ico"><svg><use href="#i-einst"/></svg></span><span>Einstellungen</span></button>
+    </nav>
+  </div>
+
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true">
+    <div class="sheet-griff" id="sheetGriff"><span></span></div>
+    <div class="sheet-inhalt" id="sheetInhalt"></div>
+  </div>
+  <div class="assistent" id="assistent" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="sim.js"></script>
+  <script src="lebensmittel.js"></script>
+  <script src="chart.js"></script>
+  <script src="optimierer.js"></script>
+  <script src="demo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
